@@ -13,10 +13,10 @@ const jsonLd = {
   "@type": "Person",
   name: "Yagnesh Patel",
   alternateName: "Yagneshkumar Patel",
-  url: "https://yagneshpatel.dev",
+  url: "https://www.yagneshpateldev.com",
   email: "yagnesh6202patel@gmail.com",
   telephone: "+919328406174",
-  image: "https://yagneshpatel.dev/images/profile.jpg",
+  image: "https://www.yagneshpateldev.com/images/profile.jpg",
   jobTitle: "Frontend & Full-Stack Developer",
   description:
     "Frontend & Full-Stack Developer with 3+ years building production web apps in React, Next.js, and Node.js. Open to global remote, hybrid, and onsite roles.",

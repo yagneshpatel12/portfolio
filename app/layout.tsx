@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 
-const BASE_URL = "https://yagneshpatel.dev";
+const BASE_URL = "https://www.yagneshpateldev.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Frontend & Full-Stack Developer with 3+ years shipping real products — nurse platforms, real estate portals, AI healthcare tools, hotel systems. Strong on React & Next.js, capable across the full stack. Open to global remote, India remote, hybrid, and onsite roles.",
+    "Frontend & Full-Stack Developer with 3+ years shipping real products. Strong on React & Next.js, capable across the full stack. Open to remote roles globally.",
 
   keywords: [
     "Yagnesh Patel",
@@ -47,15 +47,24 @@ export const metadata: Metadata = {
     siteName: "Yagnesh Patel — Portfolio",
     title: "Yagnesh Patel | Frontend & Full-Stack Developer",
     description:
-      "3+ years shipping production apps in React, Next.js, Node.js. Built nurse platforms, real estate portals, AI healthcare tools & more. Open to global remote roles.",
+      "Frontend & Full-Stack Developer with 3+ years shipping real products. Strong on React & Next.js, capable across the full stack. Open to remote roles globally.",
+    images: [
+      {
+        url: `${BASE_URL}/images/profile.jpg`,
+        width: 800,
+        height: 800,
+        alt: "Yagnesh Patel — Frontend & Full-Stack Developer",
+      },
+    ],
   },
 
   twitter: {
     card: "summary_large_image",
     title: "Yagnesh Patel | Frontend & Full-Stack Developer",
     description:
-      "3+ years shipping production apps in React, Next.js, Node.js. Built nurse platforms, real estate portals, AI healthcare tools & more. Open to global remote roles.",
+      "Frontend & Full-Stack Developer with 3+ years shipping real products. Strong on React & Next.js, capable across the full stack. Open to remote roles globally.",
     creator: "@yagneshpatel",
+    images: [`${BASE_URL}/images/profile.jpg`],
   },
 
   alternates: {
