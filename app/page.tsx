@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <main className="relative">
       <ParticlesBackground />
-      <div className="relative z-10">
+      <div className="relative z-10" style={{ isolation: "isolate" }}>
         <Navbar />
         <Hero />
         <About />

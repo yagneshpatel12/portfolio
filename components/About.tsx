@@ -97,7 +97,7 @@ export default function About() {
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">About Me</h2>
@@ -109,7 +109,7 @@ export default function About() {
           className="grid grid-cols-3 gap-6 max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
         >
           {STATS.map((stat) => (
@@ -132,7 +132,7 @@ export default function About() {
           className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
         >
           {AVAILABILITY.map((item, i) => (
@@ -140,7 +140,7 @@ export default function About() {
               key={item.label}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 + i * 0.07 }}
               className={`relative overflow-hidden rounded-xl border ${item.border} ${item.bg} p-4 flex flex-col gap-2`}
             >
@@ -166,7 +166,7 @@ export default function About() {
           className="mt-6 flex flex-wrap justify-center gap-2"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
         >
           {[

@@ -21,6 +21,11 @@ export default function Navbar() {
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const prev = lastScrollY.current;
+    // Never hide while mobile menu is open
+    if (isOpen) {
+      lastScrollY.current = latest;
+      return;
+    }
     if (latest > prev && latest > 80) {
       setHidden(true);
     } else {
@@ -50,10 +55,18 @@ export default function Navbar() {
   }, []);
 
   const handleNavClick = (href: string) => {
-    setIsOpen(false);
     const id = href.replace("#", "");
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (isOpen) {
+      // Close drawer first, then scroll after animation finishes (250ms)
+      setIsOpen(false);
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    } else {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -67,10 +80,17 @@ export default function Navbar() {
         <a
           href="#"
           onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-          className="flex items-center gap-2 font-semibold text-slate-900 text-base"
+          className="flex items-center gap-2.5 group"
         >
-          Yagnesh Patel
-          <span className="w-1.5 h-1.5 rounded-full bg-blue-500 inline-block" />
+          {/* Monogram badge */}
+          <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-xs font-bold tracking-tight shadow-sm group-hover:shadow-blue-300 group-hover:shadow-md transition-shadow flex-shrink-0">
+            YP
+          </span>
+          {/* Name + tagline */}
+          <span className="flex flex-col leading-none">
+            <span className="font-bold text-slate-900 text-sm tracking-tight">Yagnesh Patel</span>
+            <span className="text-[10px] text-slate-400 font-medium tracking-wide">Frontend & Full-Stack Dev</span>
+          </span>
         </a>
 
         {/* Desktop nav */}
@@ -82,7 +102,7 @@ export default function Navbar() {
               <li key={link.href}>
                 <button
                   onClick={() => handleNavClick(link.href)}
-                  className={`text-sm transition-colors relative pb-0.5 ${
+                  className={`cursor-pointer text-sm transition-colors relative pb-0.5 ${
                     isActive
                       ? "text-blue-500 font-medium"
                       : "text-slate-600 hover:text-blue-500"
@@ -115,7 +135,7 @@ export default function Navbar() {
 
         {/* Hamburger */}
         <button
-          className="md:hidden p-2 text-slate-700 min-h-[44px] min-w-[44px] flex items-center justify-center"
+          className="md:hidden cursor-pointer p-2 text-slate-700 min-h-[44px] min-w-[44px] flex items-center justify-center"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
@@ -138,7 +158,7 @@ export default function Navbar() {
                 <li key={link.href}>
                   <button
                     onClick={() => handleNavClick(link.href)}
-                    className="w-full text-left text-slate-700 hover:text-blue-500 py-3 text-sm font-medium min-h-[44px] flex items-center"
+                    className="cursor-pointer w-full text-left text-slate-700 hover:text-blue-500 py-3 text-sm font-medium min-h-[44px] flex items-center"
                   >
                     {link.label}
                   </button>

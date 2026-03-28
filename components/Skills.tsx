@@ -16,7 +16,7 @@ import {
   MessageSquare,
   Sparkles,
   Search,
-  LayoutGrid,
+
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -99,17 +99,20 @@ const CATEGORIES: SkillCategory[] = [
       { name: "GitLab", icon: "gitlab/gitlab-original.svg" },
       { name: "Jenkins", icon: "jenkins/jenkins-original.svg" },
       { name: "Figma", icon: "figma/figma-original.svg" },
-      { name: "Agile/Scrum", lucideIcon: LayoutGrid },
     ],
   },
   {
     title: "AI & Integrations",
     Icon: Brain,
     skills: [
-      { name: "LLM API Integration", lucideIcon: Bot },
+      { name: "OpenAI API", lucideIcon: Bot },
+      { name: "Claude API", lucideIcon: Sparkles },
+      { name: "Cursor", lucideIcon: Search },
       { name: "Prompt Engineering", lucideIcon: MessageSquare },
       { name: "AI Chat & Automation", lucideIcon: Sparkles },
       { name: "RAG Basics", lucideIcon: Search },
+      { name: "LangChain Basics", lucideIcon: Bot },
+      { name: "Vercel AI SDK", lucideIcon: Zap },
     ],
   },
 ];
@@ -158,7 +161,7 @@ export default function Skills() {
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">
@@ -172,9 +175,10 @@ export default function Skills() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, amount: 0.1 }}
         >
-          {CATEGORIES.map((cat) => (
+          {/* Regular skill cards (first 6) */}
+          {CATEGORIES.filter((c) => c.title !== "AI & Integrations").map((cat) => (
             <motion.div
               key={cat.title}
               variants={cardVariants}
@@ -188,6 +192,51 @@ export default function Skills() {
                 {cat.skills.map((skill) => (
                   <SkillPill key={skill.name} skill={skill} />
                 ))}
+              </div>
+            </motion.div>
+          ))}
+
+          {/* AI & Integrations — full-width feature card */}
+          {CATEGORIES.filter((c) => c.title === "AI & Integrations").map((cat) => (
+            <motion.div
+              key={cat.title}
+              variants={cardVariants}
+              className="md:col-span-2 lg:col-span-3 relative overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-6 hover:shadow-xl transition-all"
+            >
+              {/* Decorative orbs */}
+              <div className="absolute -top-8 -right-8 w-40 h-40 bg-violet-500 rounded-full opacity-10 blur-2xl pointer-events-none" />
+              <div className="absolute -bottom-8 left-1/3 w-48 h-48 bg-blue-500 rounded-full opacity-10 blur-2xl pointer-events-none" />
+
+              <div className="relative flex flex-col sm:flex-row sm:items-center gap-6">
+                {/* Left label */}
+                <div className="flex-shrink-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center">
+                      <cat.Icon size={16} className="text-violet-400" />
+                    </div>
+                    <h3 className="font-bold text-white text-sm">{cat.title}</h3>
+                  </div>
+                  <p className="text-slate-500 text-xs ml-10">Trending skill set</p>
+                </div>
+
+                {/* Divider */}
+                <div className="hidden sm:block w-px h-10 bg-white/10 flex-shrink-0" />
+
+                {/* Pills */}
+                <div className="flex flex-wrap gap-2">
+                  {cat.skills.map((skill) => {
+                    const LIcon = skill.lucideIcon;
+                    return (
+                      <span
+                        key={skill.name}
+                        className="bg-white/10 border border-white/15 text-slate-200 text-xs rounded-full px-3 py-1.5 flex items-center gap-1.5 font-medium whitespace-nowrap shrink-0 hover:bg-white/20 transition-colors"
+                      >
+                        {LIcon && <LIcon size={12} className="text-violet-400" />}
+                        {skill.name}
+                      </span>
+                    );
+                  })}
+                </div>
               </div>
             </motion.div>
           ))}

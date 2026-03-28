@@ -15,9 +15,10 @@ const containerVariants: Variants = {
 };
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" as const } },
 };
+
 
 export default function Hero() {
   const scrollToProjects = () => {
@@ -57,7 +58,7 @@ export default function Hero() {
               variants={fadeUp}
               className="text-2xl text-slate-500 font-medium mb-6"
             >
-              Full-Stack Developer | React · Next.js · Node.js
+              Frontend & Full-Stack Developer | React · Next.js · Node.js
             </motion.h2>
 
             {/* Para */}
@@ -65,9 +66,7 @@ export default function Hero() {
               variants={fadeUp}
               className="text-slate-500 text-lg leading-relaxed max-w-xl mb-8"
             >
-              I build fast, scalable web applications for startups — from clean
-              frontends to robust backends. 3+ years shipping production apps
-              across healthcare, real estate, hospitality, and e-commerce.
+              Full-stack developer with 3+ years building and shipping real products — nurse platforms, real estate portals, AI healthcare tools, hotel systems. Strong on frontend, capable across the full stack. Clean code, real ownership, startup pace.
             </motion.p>
 
             {/* Buttons */}

@@ -19,7 +19,7 @@ export default function Contact() {
           className="text-center mb-14"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <span className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 text-xs font-semibold px-4 py-1.5 rounded-full border border-blue-100 mb-4">
@@ -45,7 +45,7 @@ export default function Contact() {
             className="lg:col-span-2 flex flex-col gap-4"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
           >
             {/* Info card */}
@@ -132,7 +132,7 @@ export default function Contact() {
             className="lg:col-span-3"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
           >
             <div className="relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 h-full flex flex-col justify-between overflow-hidden shadow-xl">
