@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
+import Script from "next/script";
 import "./globals.css";
+
+const GA_ID = "G-M281BMHP3C";
 
 const BASE_URL = "https://www.yagneshpateldev.com";
 
@@ -98,8 +101,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${GeistSans.variable} h-full antialiased`}>
-      <body className="min-h-full bg-[#FAFAFA] font-sans">{children}</body>
+   <html lang="en" className={`${GeistSans.variable} h-full antialiased`}>
+      <body className="min-h-full bg-[#FAFAFA] font-sans">
+        {children}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}');
+          `}
+        </Script>
+      </body>
     </html>
   );
 }
