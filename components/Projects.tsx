@@ -162,7 +162,7 @@ export default function Projects() {
               {/* Body */}
               <div className="flex-1 flex items-center">
                 <p className="text-slate-300 text-sm leading-relaxed">
-                  I&apos;ve shipped <span className="text-white font-semibold">10+ production projects</span> across healthcare, real estate, hospitality, and e-commerce — most under <span className="text-white font-semibold">NDA</span> as part of my professional work at SolGuruz LLP.
+                  I&apos;ve shipped <span className="text-white font-semibold">10+ production projects</span> across healthcare, real estate, hospitality, and e-commerce — most under <span className="text-white font-semibold">NDA</span> as part of my professional work at SolGuruz.
                 </p>
               </div>
 

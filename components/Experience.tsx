@@ -31,7 +31,7 @@ function calcDuration(startDate: string, endDate?: string): string {
 
 const JOBS: Job[] = [
   {
-    company: "SolGuruz LLP",
+    company: "SolGuruz",
     role: "Software Engineer",
     period: "July 2023 – Present",
     startDate: "2023-07",
@@ -49,7 +49,7 @@ const JOBS: Job[] = [
     ],
   },
   {
-    company: "SolGuruz LLP",
+    company: "SolGuruz",
     role: "Software Engineer",
     period: "March 2022 – Nov 2022",
     startDate: "2022-03",

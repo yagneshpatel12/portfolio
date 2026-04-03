@@ -55,7 +55,7 @@ const jsonLd = {
   },
   worksFor: {
     "@type": "Organization",
-    name: "SolGuruz LLP",
+    name: "SolGuruz",
     url: "https://solguruz.com",
   },
 };
