@@ -66,7 +66,7 @@ export default function Hero() {
               variants={fadeUp}
               className="text-slate-500 text-lg leading-relaxed max-w-xl mb-8"
             >
-              Full-stack developer with 3+ years building and shipping real products — nurse platforms, real estate portals, AI healthcare tools, hotel systems. Strong on frontend, capable across the full stack. Clean code, real ownership, startup pace.
+              Full-stack developer with 3.5+ years building and shipping real products — nurse platforms, real estate portals, AI healthcare tools, hotel systems. Strong on frontend, capable across the full stack. Clean code, real ownership, startup pace.
             </motion.p>
 
             {/* Buttons */}

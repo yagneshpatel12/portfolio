@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Frontend & Full-Stack Developer with 3+ years shipping real products. Strong on React & Next.js, capable across the full stack. Open to remote roles globally.",
+    "Frontend & Full-Stack Developer with 3.5+ years shipping real products. Strong on React & Next.js, capable across the full stack. Open to remote roles globally.",
 
   keywords: [
     "Yagnesh Patel",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     siteName: "Yagnesh Patel — Portfolio",
     title: "Yagnesh Patel | Frontend & Full-Stack Developer",
     description:
-      "Frontend & Full-Stack Developer with 3+ years shipping real products. Strong on React & Next.js, capable across the full stack. Open to remote roles globally.",
+      "Frontend & Full-Stack Developer with 3.5+ years shipping real products. Strong on React & Next.js, capable across the full stack. Open to remote roles globally.",
     images: [
       {
         url: `${BASE_URL}/images/profile.jpg`,
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Yagnesh Patel | Frontend & Full-Stack Developer",
     description:
-      "Frontend & Full-Stack Developer with 3+ years shipping real products. Strong on React & Next.js, capable across the full stack. Open to remote roles globally.",
+      "Frontend & Full-Stack Developer with 3.5+ years shipping real products. Strong on React & Next.js, capable across the full stack. Open to remote roles globally.",
     creator: "@yagneshpatel",
     images: [`${BASE_URL}/images/profile.jpg`],
   },

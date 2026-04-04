@@ -19,7 +19,7 @@ const jsonLd = {
   image: "https://www.yagneshpateldev.com/images/profile.jpg",
   jobTitle: "Frontend & Full-Stack Developer",
   description:
-    "Frontend & Full-Stack Developer with 3+ years building production web apps in React, Next.js, and Node.js. Open to global remote, hybrid, and onsite roles.",
+    "Frontend & Full-Stack Developer with 3.5+ years building production web apps in React, Next.js, and Node.js. Open to global remote, hybrid, and onsite roles.",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Visnagar",
