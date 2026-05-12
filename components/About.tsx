@@ -11,7 +11,7 @@ interface StatItem {
 }
 
 const STATS: StatItem[] = [
-  { value: 3, suffix: "+", label: "Years Experience" },
+  { value: 3.5, suffix: "+", label: "Years Experience" },
   { value: 10, suffix: "+", label: "Projects Delivered" },
   { value: 6, suffix: "", label: "Team Members Led" },
 ];
@@ -100,7 +100,9 @@ export default function About() {
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">About Me</h2>
+          <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">
+            About Me
+          </h2>
           <div className="w-12 h-1 bg-blue-500 mx-auto mt-2 rounded" />
         </motion.div>
 
@@ -141,21 +143,33 @@ export default function About() {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 + i * 0.07 }}
+              transition={{
+                duration: 0.4,
+                ease: "easeOut",
+                delay: 0.2 + i * 0.07,
+              }}
               className={`relative overflow-hidden rounded-xl border ${item.border} ${item.bg} p-4 flex flex-col gap-2`}
             >
               {/* Top gradient bar */}
-              <div className={`absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r ${item.gradient}`} />
+              <div
+                className={`absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r ${item.gradient}`}
+              />
 
               {/* Icon */}
-              <div className={`w-8 h-8 rounded-lg ${item.iconBg} flex items-center justify-center flex-shrink-0`}>
+              <div
+                className={`w-8 h-8 rounded-lg ${item.iconBg} flex items-center justify-center flex-shrink-0`}
+              >
                 <item.icon size={16} className="text-white" />
               </div>
 
               {/* Text */}
               <div>
-                <p className={`font-semibold text-sm ${item.text}`}>{item.label}</p>
-                <p className="text-slate-500 text-xs mt-0.5 leading-tight">{item.sublabel}</p>
+                <p className={`font-semibold text-sm ${item.text}`}>
+                  {item.label}
+                </p>
+                <p className="text-slate-500 text-xs mt-0.5 leading-tight">
+                  {item.sublabel}
+                </p>
               </div>
             </motion.div>
           ))}
