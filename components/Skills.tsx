@@ -16,7 +16,11 @@ import {
   MessageSquare,
   Sparkles,
   Search,
-
+  Plug,
+  Link,
+  Terminal,
+  MousePointer2,
+  Workflow,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -97,6 +101,8 @@ const CATEGORIES: SkillCategory[] = [
       { name: "Git", icon: "git/git-original.svg" },
       { name: "GitHub", icon: "github/github-original.svg" },
       { name: "GitLab", icon: "gitlab/gitlab-original.svg" },
+      { name: "Vercel", icon: "vercel/vercel-original.svg" },
+      { name: "AWS", icon: "amazonwebservices/amazonwebservices-original-wordmark.svg" },
       { name: "Jenkins", icon: "jenkins/jenkins-original.svg" },
       { name: "Figma", icon: "figma/figma-original.svg" },
     ],
@@ -105,14 +111,16 @@ const CATEGORIES: SkillCategory[] = [
     title: "AI & Integrations",
     Icon: Brain,
     skills: [
-      { name: "OpenAI API", lucideIcon: Bot },
+      { name: "AI Agents", lucideIcon: Workflow },
+      { name: "MCP", lucideIcon: Plug },
+      { name: "RAG", lucideIcon: Search },
       { name: "Claude API", lucideIcon: Sparkles },
-      { name: "Cursor", lucideIcon: Search },
-      { name: "Prompt Engineering", lucideIcon: MessageSquare },
-      { name: "AI Chat & Automation", lucideIcon: Sparkles },
-      { name: "RAG Basics", lucideIcon: Search },
-      { name: "LangChain Basics", lucideIcon: Bot },
+      { name: "OpenAI API", lucideIcon: Bot },
+      { name: "LangChain", lucideIcon: Link },
       { name: "Vercel AI SDK", lucideIcon: Zap },
+      { name: "Claude Code", lucideIcon: Terminal },
+      { name: "Cursor", lucideIcon: MousePointer2 },
+      { name: "Prompt Engineering", lucideIcon: MessageSquare },
     ],
   },
 ];
