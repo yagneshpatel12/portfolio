@@ -148,7 +148,7 @@ export default function Contact() {
                   Ready to hire or collaborate?
                 </h3>
                 <p className="text-slate-400 text-sm leading-relaxed mb-8">
-                  Whether you&apos;re a startup scaling fast, a product team looking for a reliable engineer, or a recruiter with an exciting role — I&apos;d love to hear from you. I typically respond within 24 hours.
+                  Whether you&apos;re a startup scaling fast, a product team looking for a reliable engineer, or a recruiter with an exciting role, I&apos;d love to hear from you. I typically respond within 24 hours.
                 </p>
 
                 {/* Response time badge */}

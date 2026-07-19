@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: BASE_URL,
-    siteName: "Yagnesh Patel — Portfolio",
+    siteName: "Yagnesh Patel · Portfolio",
     title: "Yagnesh Patel | Frontend & Full-Stack Developer",
     description: DESCRIPTION,
     images: [
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
         url: `${BASE_URL}/images/profile.jpg`,
         width: 800,
         height: 800,
-        alt: "Yagnesh Patel — Frontend & Full-Stack Developer",
+        alt: "Yagnesh Patel, Frontend & Full-Stack Developer",
       },
     ],
   },
