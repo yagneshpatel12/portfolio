@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, type Variants } from "motion/react";
 import { Download, Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./icons";
+import { experienceLabel } from "@/lib/experience";
 
 const containerVariants: Variants = {
   hidden: {},
@@ -21,6 +22,8 @@ const fadeUp: Variants = {
 
 
 export default function Hero() {
+  const { phrase: experiencePhrase } = experienceLabel();
+
   const scrollToProjects = () => {
     const el = document.getElementById("projects");
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -66,7 +69,7 @@ export default function Hero() {
               variants={fadeUp}
               className="text-slate-500 text-lg leading-relaxed max-w-xl mb-8"
             >
-              Full-stack developer with 3.5+ years building and shipping real products — nurse platforms, real estate portals, AI healthcare tools, hotel systems. Strong on frontend, capable across the full stack. Clean code, real ownership, startup pace.
+              Full-stack developer with {experiencePhrase} building and shipping real products — nurse platforms, real estate portals, AI healthcare tools, hotel systems. Strong on frontend, capable across the full stack. Clean code, real ownership, startup pace.
             </motion.p>
 
             {/* Buttons */}

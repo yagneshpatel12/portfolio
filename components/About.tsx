@@ -3,15 +3,19 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
 import { Globe, MapPin, Laptop, Building2 } from "lucide-react";
+import { experienceLabel } from "@/lib/experience";
 
 interface StatItem {
   value: number;
+  prefix?: string;
   suffix: string;
   label: string;
 }
 
+const exp = experienceLabel();
+
 const STATS: StatItem[] = [
-  { value: 3.5, suffix: "+", label: "Years Experience" },
+  { value: exp.value, prefix: exp.prefix, suffix: "", label: "Years Experience" },
   { value: 10, suffix: "+", label: "Projects Delivered" },
   { value: 6, suffix: "", label: "Team Members Led" },
 ];
@@ -59,7 +63,7 @@ const AVAILABILITY = [
   },
 ];
 
-function CountUp({ target, suffix }: { target: number; suffix: string }) {
+function CountUp({ target, prefix = "", suffix }: { target: number; prefix?: string; suffix: string }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
@@ -82,6 +86,7 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
 
   return (
     <span ref={ref} className="text-4xl font-bold text-blue-500">
+      {prefix}
       {count}
       {suffix}
     </span>
@@ -120,7 +125,7 @@ export default function About() {
               className="bg-white border border-slate-200 rounded-xl p-6 text-center shadow-sm"
             >
               <div className="mb-1">
-                <CountUp target={stat.value} suffix={stat.suffix} />
+                <CountUp target={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
               </div>
               <p className="text-slate-500 text-sm font-medium leading-tight">
                 {stat.label}

@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import Script from "next/script";
 import "./globals.css";
+import { experienceLabel } from "@/lib/experience";
 
 const GA_ID = "G-M281BMHP3C";
 
 const BASE_URL = "https://www.yagneshpateldev.com";
+
+const DESCRIPTION = `Frontend & Full-Stack Developer with ${experienceLabel().phrase} shipping real products. Strong on React & Next.js, capable across the full stack. Open to remote roles globally.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -15,8 +18,7 @@ export const metadata: Metadata = {
     template: "%s | Yagnesh Patel",
   },
 
-  description:
-    "Frontend & Full-Stack Developer with 3.5+ years shipping real products. Strong on React & Next.js, capable across the full stack. Open to remote roles globally.",
+  description: DESCRIPTION,
 
   keywords: [
     "Yagnesh Patel",
@@ -49,8 +51,7 @@ export const metadata: Metadata = {
     url: BASE_URL,
     siteName: "Yagnesh Patel — Portfolio",
     title: "Yagnesh Patel | Frontend & Full-Stack Developer",
-    description:
-      "Frontend & Full-Stack Developer with 3.5+ years shipping real products. Strong on React & Next.js, capable across the full stack. Open to remote roles globally.",
+    description: DESCRIPTION,
     images: [
       {
         url: `${BASE_URL}/images/profile.jpg`,
@@ -64,8 +65,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Yagnesh Patel | Frontend & Full-Stack Developer",
-    description:
-      "Frontend & Full-Stack Developer with 3.5+ years shipping real products. Strong on React & Next.js, capable across the full stack. Open to remote roles globally.",
+    description: DESCRIPTION,
     creator: "@yagneshpatel",
     images: [`${BASE_URL}/images/profile.jpg`],
   },

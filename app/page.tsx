@@ -9,6 +9,7 @@ import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ParticlesBackground from "@/components/ParticlesBackground";
+import { experienceLabel } from "@/lib/experience";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -20,8 +21,7 @@ const jsonLd = {
   telephone: "+919328406174",
   image: "https://www.yagneshpateldev.com/images/profile.jpg",
   jobTitle: "Frontend & Full-Stack Developer",
-  description:
-    "Frontend & Full-Stack Developer with 3.5+ years building production web apps in React, Next.js, and Node.js. Open to global remote, hybrid, and onsite roles.",
+  description: `Frontend & Full-Stack Developer with ${experienceLabel().phrase} building production web apps in React, Next.js, and Node.js. Open to global remote, hybrid, and onsite roles.`,
   address: {
     "@type": "PostalAddress",
     addressLocality: "Visnagar",
