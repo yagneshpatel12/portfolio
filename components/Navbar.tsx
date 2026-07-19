@@ -96,7 +96,7 @@ export default function Navbar() {
         </a>
 
         {/* Desktop nav */}
-        <ul className="hidden md:flex items-center gap-6">
+        <ul className="hidden lg:flex items-center gap-6">
           {NAV_LINKS.map((link) => {
             const id = link.href.replace("#", "");
             const isActive = activeSection === id;
@@ -124,7 +124,7 @@ export default function Navbar() {
         </ul>
 
         {/* CTA */}
-        <div className="hidden md:flex items-center">
+        <div className="hidden lg:flex items-center">
           <a
             href="https://mail.google.com/mail/?view=cm&to=yagnesh6202patel@gmail.com"
             target="_blank"
@@ -137,7 +137,7 @@ export default function Navbar() {
 
         {/* Hamburger */}
         <button
-          className="md:hidden cursor-pointer p-2 text-slate-700 min-h-[44px] min-w-[44px] flex items-center justify-center"
+          className="lg:hidden cursor-pointer p-2 text-slate-700 min-h-[44px] min-w-[44px] flex items-center justify-center"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
@@ -153,7 +153,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="md:hidden overflow-hidden bg-white/95 border-t border-slate-100"
+            className="lg:hidden overflow-hidden bg-white/95 border-t border-slate-100"
           >
             <ul className="px-4 py-4 flex flex-col gap-1">
               {NAV_LINKS.map((link) => (
