@@ -76,10 +76,13 @@ function Browser({ project }: { project: Project }) {
     >
       {/* Chrome */}
       <div className="flex items-center gap-2 border-b border-edge bg-bone px-4 py-3">
-        <span className="flex gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-edge" />
-          <span className="h-2.5 w-2.5 rounded-full bg-edge" />
-          <span className="h-2.5 w-2.5 rounded-full bg-edge" />
+        {/* Traffic lights. Deliberately literal macOS values, not theme tokens:
+            alert and mint have assigned jobs (errors, live status) and mint is
+            already doing that job on this very card. */}
+        <span aria-hidden className="flex gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
         </span>
         <span className="ml-2 flex min-w-0 flex-1 items-center gap-1.5 rounded-md border border-edge bg-white px-2.5 py-1">
           <Lock size={10} className="flex-shrink-0 text-mint" />
