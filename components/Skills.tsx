@@ -1,253 +1,181 @@
 "use client";
 
 import { motion, type Variants } from "motion/react";
-import {
-  Layout,
-  Server,
-  Code2,
-  Database,
-  Paintbrush,
-  GitBranch,
-  Brain,
-  Globe,
-  Shield,
-  Zap,
-  Bot,
-  MessageSquare,
-  Search,
-  Plug,
-  Link,
-  Terminal,
-  MousePointer2,
-  Workflow,
-  Cpu,
-} from "lucide-react";
+import { Layout, Server, Rocket, Brain } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-const DEVICON_BASE =
-  "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/";
-
-interface SkillItem {
-  name: string;
-  icon?: string; // devicon path relative to base
-  lucideIcon?: LucideIcon;
-  badge?: string;
-}
-
-interface SkillCategory {
-  title: string;
+interface Capability {
+  label: string;
   Icon: LucideIcon;
-  skills: SkillItem[];
+  blurb: string;
+  tags: string[];
 }
 
-const CATEGORIES: SkillCategory[] = [
+// Grouped by the part of the product it covers, so the list reads as
+// "nothing here needs a second hire" rather than as a tool inventory.
+const CAPABILITIES: Capability[] = [
   {
-    title: "Frontend",
+    label: "Frontend & interface",
     Icon: Layout,
-    skills: [
-      { name: "React.js", icon: "react/react-original.svg" },
-      { name: "Next.js", icon: "nextjs/nextjs-original.svg" },
-      { name: "Redux", icon: "redux/redux-original.svg" },
-      { name: "Zustand", badge: "Z" },
-      { name: "GraphQL", icon: "graphql/graphql-plain.svg" },
-      { name: "Context API", lucideIcon: GitBranch },
-      { name: "SSR", lucideIcon: Zap },
-      { name: "SEO", lucideIcon: Zap },
-      { name: "Web Performance", lucideIcon: Zap },
+    blurb: "The part your users touch, on every screen size.",
+    tags: [
+      "React.js",
+      "Next.js",
+      "TypeScript",
+      "JavaScript ES6",
+      "Redux",
+      "Zustand",
+      "Context API",
+      "Tailwind CSS",
+      "Ant Design",
+      "Material UI",
+      "SCSS",
+      "Figma",
+      "SSR",
+      "SEO",
+      "Web performance",
     ],
   },
   {
-    title: "Backend",
+    label: "Backend & data",
     Icon: Server,
-    skills: [
-      { name: "Node.js", icon: "nodejs/nodejs-original.svg" },
-      { name: "Express.js", badge: "Ex" },
-      { name: "REST APIs", lucideIcon: Globe },
-      { name: "JWT Auth", lucideIcon: Shield },
-      { name: "Socket.io", lucideIcon: Zap },
-      { name: "Strapi CMS", badge: "St" },
+    blurb: "APIs, auth and the database sitting behind them.",
+    tags: [
+      "Node.js",
+      "Express.js",
+      "REST APIs",
+      "GraphQL",
+      "Socket.io",
+      "JWT auth",
+      "Strapi CMS",
+      "MongoDB",
+      "PostgreSQL",
     ],
   },
   {
-    title: "Languages",
-    Icon: Code2,
-    skills: [
-      { name: "JavaScript ES6", icon: "javascript/javascript-original.svg" },
-      { name: "TypeScript", icon: "typescript/typescript-original.svg" },
-    ],
-  },
-  {
-    title: "Databases",
-    Icon: Database,
-    skills: [
-      { name: "MongoDB", icon: "mongodb/mongodb-original.svg" },
-      { name: "PostgreSQL", icon: "postgresql/postgresql-original.svg" },
-    ],
-  },
-  {
-    title: "Styling & UI",
-    Icon: Paintbrush,
-    skills: [
-      { name: "Tailwind CSS", icon: "tailwindcss/tailwindcss-original.svg" },
-      { name: "Ant Design", icon: "antdesign/antdesign-original.svg" },
-      { name: "Material UI", icon: "materialui/materialui-original.svg" },
-      { name: "SCSS", icon: "sass/sass-original.svg" },
-    ],
-  },
-  {
-    title: "DevOps & Tools",
-    Icon: GitBranch,
-    skills: [
-      { name: "Git", icon: "git/git-original.svg" },
-      { name: "GitHub", icon: "github/github-original.svg" },
-      { name: "GitLab", icon: "gitlab/gitlab-original.svg" },
-      { name: "Vercel", icon: "vercel/vercel-original.svg" },
-      { name: "AWS", icon: "amazonwebservices/amazonwebservices-original-wordmark.svg" },
-      { name: "Jenkins", icon: "jenkins/jenkins-original.svg" },
-      { name: "Figma", icon: "figma/figma-original.svg" },
-    ],
-  },
-  {
-    title: "AI & Integrations",
-    Icon: Brain,
-    skills: [
-      { name: "AI Agents", lucideIcon: Workflow },
-      { name: "MCP", lucideIcon: Plug },
-      { name: "RAG", lucideIcon: Search },
-      { name: "Claude Code", lucideIcon: Terminal },
-      { name: "OpenAI Codex", lucideIcon: Bot },
-      { name: "LLM API Integration", lucideIcon: Cpu },
-      { name: "LangChain", lucideIcon: Link },
-      { name: "Vercel AI SDK", lucideIcon: Zap },
-      { name: "Cursor", lucideIcon: MousePointer2 },
-      { name: "Prompt Engineering", lucideIcon: MessageSquare },
-    ],
+    label: "Ship & run",
+    Icon: Rocket,
+    blurb: "Getting it live, and keeping it that way.",
+    tags: ["Vercel", "AWS", "Jenkins", "CI/CD", "Git", "GitHub", "GitLab"],
   },
 ];
 
-const containerVariants: Variants = {
-  hidden: {},
+const AI: Capability = {
+  label: "AI & integrations",
+  Icon: Brain,
+  blurb: "Where most of the new work is going, and I already build there.",
+  tags: [
+    "AI agents",
+    "MCP",
+    "RAG",
+    "LLM API integration",
+    "LangChain",
+    "Vercel AI SDK",
+    "Claude Code",
+    "OpenAI Codex",
+    "Cursor",
+    "Prompt engineering",
+  ],
+};
+
+const rowVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
   visible: {
-    transition: { staggerChildren: 0.07 },
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" as const },
   },
 };
 
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
-};
-
-function SkillPill({ skill }: { skill: SkillItem }) {
-  const LIcon = skill.lucideIcon;
-  return (
-    <span className="bg-blue-50 text-blue-700 text-xs rounded-full px-3 py-1 flex items-center gap-1.5 font-medium whitespace-nowrap shrink-0">
-      {skill.icon ? (
-        <img
-          src={`${DEVICON_BASE}${skill.icon}`}
-          alt={skill.name}
-          width={16}
-          height={16}
-        />
-      ) : LIcon ? (
-        <LIcon size={12} />
-      ) : skill.badge ? (
-        <span className="w-4 h-4 rounded-full bg-blue-500 text-white text-[10px] flex items-center justify-center font-bold">
-          {skill.badge}
-        </span>
-      ) : null}
-      {skill.name}
-    </span>
-  );
-}
-
 export default function Skills() {
   return (
-    <section id="skills" className="py-20 bg-slate-50">
+    <section id="skills" className="py-24 bg-bone">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Heading */}
         <motion.div
-          className="text-center mb-12"
+          className="max-w-3xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">
-            Technical Skills
+          <div className="flex items-center gap-3 mb-5">
+            <span className="h-[2px] w-10 bg-signal" />
+            <span className="text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase text-signal">
+              Skills
+            </span>
+          </div>
+          <h2 className="text-3xl lg:text-[2.75rem] leading-[1.05] font-bold text-forest tracking-[-0.03em]">
+            Everything a product needs, from one person.
           </h2>
-          <div className="w-12 h-1 bg-blue-500 mx-auto mt-2 rounded" />
         </motion.div>
 
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-        >
-          {/* Regular skill cards (first 6) */}
-          {CATEGORIES.filter((c) => c.title !== "AI & Integrations").map((cat) => (
+        {/* Capability rows */}
+        <div className="mt-12 border-t border-edge">
+          {CAPABILITIES.map((cap, i) => (
             <motion.div
-              key={cat.title}
-              variants={cardVariants}
-              className="bg-white border border-slate-200 rounded-xl p-6 hover:shadow-md hover:-translate-y-1 transition-all"
+              key={cap.label}
+              variants={rowVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ delay: i * 0.08 }}
+              className="grid lg:grid-cols-12 gap-4 lg:gap-10 py-8 border-b border-edge"
             >
-              <div className="flex items-center gap-2 mb-4">
-                <cat.Icon size={18} className="text-blue-500 flex-shrink-0" />
-                <h3 className="font-bold text-slate-900 text-sm">{cat.title}</h3>
+              <div className="lg:col-span-4">
+                <div className="flex items-center gap-2.5">
+                  <cap.Icon size={17} className="text-signal flex-shrink-0" />
+                  <h3 className="text-base font-bold text-forest tracking-tight">
+                    {cap.label}
+                  </h3>
+                </div>
+                <p className="mt-2 text-sm text-moss leading-relaxed max-w-xs">
+                  {cap.blurb}
+                </p>
               </div>
-              <div className="flex flex-wrap gap-2">
-                {cat.skills.map((skill) => (
-                  <SkillPill key={skill.name} skill={skill} />
+
+              <div className="lg:col-span-8 flex flex-wrap gap-2 content-start">
+                {cap.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-edge bg-white px-3.5 py-1.5 text-sm font-medium text-deep hover:border-signal hover:text-signal transition-colors"
+                  >
+                    {tag}
+                  </span>
                 ))}
               </div>
             </motion.div>
           ))}
+        </div>
 
-          {/* AI & Integrations — full-width feature card */}
-          {CATEGORIES.filter((c) => c.title === "AI & Integrations").map((cat) => (
-            <motion.div
-              key={cat.title}
-              variants={cardVariants}
-              className="md:col-span-2 lg:col-span-3 relative overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-6 hover:shadow-xl transition-all"
-            >
-              {/* Decorative orbs */}
-              <div className="absolute -top-8 -right-8 w-40 h-40 bg-violet-500 rounded-full opacity-10 blur-2xl pointer-events-none" />
-              <div className="absolute -bottom-8 left-1/3 w-48 h-48 bg-blue-500 rounded-full opacity-10 blur-2xl pointer-events-none" />
+        {/* AI & integrations — the differentiator, so it gets the dark card */}
+        <motion.div
+          className="mt-8 rounded-3xl bg-forest text-bone p-7 sm:p-9 grid lg:grid-cols-12 gap-6 lg:gap-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <div className="lg:col-span-4">
+            <div className="flex items-center gap-2.5">
+              <AI.Icon size={17} className="text-citrus flex-shrink-0" />
+              <h3 className="text-base font-bold tracking-tight">{AI.label}</h3>
+            </div>
+            <p className="mt-2 text-sm text-bone/70 leading-relaxed max-w-xs">
+              {AI.blurb}
+            </p>
+          </div>
 
-              <div className="relative flex flex-col sm:flex-row sm:items-center gap-6">
-                {/* Left label */}
-                <div className="flex-shrink-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center">
-                      <cat.Icon size={16} className="text-violet-400" />
-                    </div>
-                    <h3 className="font-bold text-white text-sm">{cat.title}</h3>
-                  </div>
-                  <p className="text-slate-500 text-xs ml-10">Trending skill set</p>
-                </div>
-
-                {/* Divider */}
-                <div className="hidden sm:block w-px h-10 bg-white/10 flex-shrink-0" />
-
-                {/* Pills */}
-                <div className="flex flex-wrap gap-2">
-                  {cat.skills.map((skill) => {
-                    const LIcon = skill.lucideIcon;
-                    return (
-                      <span
-                        key={skill.name}
-                        className="bg-white/10 border border-white/15 text-slate-200 text-xs rounded-full px-3 py-1.5 flex items-center gap-1.5 font-medium whitespace-nowrap shrink-0 hover:bg-white/20 transition-colors"
-                      >
-                        {LIcon && <LIcon size={12} className="text-violet-400" />}
-                        {skill.name}
-                      </span>
-                    );
-                  })}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+          <div className="lg:col-span-8 flex flex-wrap gap-2 content-start">
+            {AI.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-bone/20 bg-bone/10 px-3.5 py-1.5 text-sm font-medium text-bone/90 hover:bg-bone/20 hover:border-citrus/60 transition-colors"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

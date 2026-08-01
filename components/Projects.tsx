@@ -1,238 +1,302 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import { motion } from "motion/react";
-import { ExternalLink, ArrowRight, Rocket, Star, Calendar } from "lucide-react";
+import { ArrowUpRight, ArrowRight, Lock } from "lucide-react";
 import { GithubIcon } from "./icons";
-
-const DEVICON_BASE =
-  "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/";
-
-interface TechItem {
-  name: string;
-  icon?: string;
-}
 
 interface Project {
   title: string;
   subtitle: string;
   category: string;
-  featured: boolean;
   date: string;
   description: string;
-  tech: TechItem[];
+  highlights: string[];
+  tech: string[];
   liveDemo: string;
   github: string;
-  gradient: string;
+  /** Screenshot in /public/projects. Falls back to a designed panel until one exists. */
+  image?: string;
 }
 
 const PROJECTS: Project[] = [
   {
     title: "GymFlow",
-    subtitle: "Gym Management SaaS",
-    category: "Full Stack",
-    featured: true,
+    subtitle: "Gym management SaaS",
+    category: "Full stack",
     date: "2026",
     description:
-      "Production-quality gym management SaaS with a marketing landing site, real JWT auth, and an admin dashboard. Owners manage members, class schedules, attendance check-ins, trainers, and membership plans, with KPI charts and progress photos stored in MongoDB.",
-    tech: [
-      { name: "Next.js 16", icon: "nextjs/nextjs-original.svg" },
-      { name: "React 19", icon: "react/react-original.svg" },
-      { name: "TypeScript", icon: "typescript/typescript-original.svg" },
-      { name: "MongoDB", icon: "mongodb/mongodb-original.svg" },
-      { name: "Tailwind CSS", icon: "tailwindcss/tailwindcss-original.svg" },
+      "A complete gym operations product: marketing site, real authentication, and an owner dashboard for members, classes, attendance, trainers and plans.",
+    highlights: [
+      "Marketing site and app in one build",
+      "JWT auth with owner and staff roles",
+      "KPI charts and attendance check-ins",
+      "Progress photos stored in MongoDB",
     ],
+    tech: ["Next.js 16", "React 19", "TypeScript", "MongoDB", "Tailwind CSS"],
     liveDemo: "https://getgymflow.vercel.app/",
     github: "https://github.com/yagneshpatel12/GymFlow",
-    gradient: "from-emerald-500 to-teal-500",
+    image: "/projects/gymflow.png",
   },
   {
     title: "Digital Society",
-    subtitle: "Society Management Web App",
-    category: "Full Stack",
-    featured: true,
+    subtitle: "Society management web app",
+    category: "Full stack",
     date: "Oct 2021",
     description:
-      "Full stack platform with role-based admin panel for managing society members, families, events, complaints, and advertisements. Secured with JWT + OTP authentication.",
-    tech: [
-      { name: "React.js", icon: "react/react-original.svg" },
-      { name: "Node.js", icon: "nodejs/nodejs-original.svg" },
-      { name: "MongoDB", icon: "mongodb/mongodb-original.svg" },
-      { name: "Cloudinary" },
-      { name: "REST API" },
+      "A platform for running a residential society: a role-based admin panel covering members, families, events, complaints and notices, secured end to end.",
+    highlights: [
+      "Role-based admin panel",
+      "JWT and OTP authentication",
+      "Complaints and event workflows",
+      "Media handled through Cloudinary",
     ],
+    tech: ["React.js", "Node.js", "MongoDB", "Cloudinary", "REST API"],
     liveDemo: "https://society-management.onrender.com/",
     github: "https://github.com/yagneshpatel12/society-management-webapp",
-    gradient: "from-blue-500 to-indigo-500",
+    image: "/projects/digital-society.png",
   },
 ];
 
+const domainOf = (url: string) => url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+
+function Browser({ project }: { project: Project }) {
+  // Until a screenshot exists at that path, fall back rather than showing a
+  // broken image.
+  const [missing, setMissing] = useState(false);
+  const showShot = Boolean(project.image) && !missing;
+
+  return (
+    <a
+      href={project.liveDemo}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block overflow-hidden rounded-2xl border border-edge bg-white shadow-xl shadow-forest/10 transition-all hover:-translate-y-1 hover:shadow-2xl hover:shadow-forest/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2"
+    >
+      {/* Chrome */}
+      <div className="flex items-center gap-2 border-b border-edge bg-bone px-4 py-3">
+        <span className="flex gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-full bg-edge" />
+          <span className="h-2.5 w-2.5 rounded-full bg-edge" />
+          <span className="h-2.5 w-2.5 rounded-full bg-edge" />
+        </span>
+        <span className="ml-2 flex min-w-0 flex-1 items-center gap-1.5 rounded-md border border-edge bg-white px-2.5 py-1">
+          <Lock size={10} className="flex-shrink-0 text-mint" />
+          <span className="truncate text-[11px] text-soft">
+            {domainOf(project.liveDemo)}
+          </span>
+        </span>
+        <ArrowUpRight
+          size={15}
+          className="flex-shrink-0 text-soft transition-all group-hover:text-signal group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        />
+      </div>
+
+      {/* Viewport — contain, so a wide capture letterboxes instead of losing its right edge */}
+      <div
+        className={`relative aspect-[16/10] ${showShot ? "bg-white" : "bg-bone"}`}
+      >
+        {showShot ? (
+          <Image
+            src={project.image as string}
+            alt={`${project.title} interface`}
+            fill
+            sizes="(max-width: 1024px) 92vw, 640px"
+            onError={() => setMissing(true)}
+            className="object-contain object-top transition-transform duration-700 group-hover:scale-[1.02]"
+          />
+        ) : (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+            <div
+              aria-hidden
+              className="absolute inset-0"
+              style={{
+                backgroundImage:
+                  "linear-gradient(rgba(11,59,46,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(11,59,46,0.05) 1px, transparent 1px)",
+                backgroundSize: "36px 36px",
+                maskImage:
+                  "radial-gradient(ellipse 70% 70% at 50% 50%, #000 20%, transparent 75%)",
+                WebkitMaskImage:
+                  "radial-gradient(ellipse 70% 70% at 50% 50%, #000 20%, transparent 75%)",
+              }}
+            />
+            <span className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-forest text-lg font-bold text-bone">
+              {project.title.charAt(0)}
+            </span>
+            <span className="relative text-sm font-semibold text-forest">
+              Open the live app
+            </span>
+          </div>
+        )}
+      </div>
+    </a>
+  );
+}
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-20 bg-slate-50">
+    <section id="projects" className="py-24 bg-bone">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Heading */}
         <motion.div
-          className="text-center mb-12"
+          className="max-w-2xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">
-            Featured Projects
+          <div className="mb-5 flex items-center gap-3">
+            <span className="h-[2px] w-10 bg-signal" />
+            <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-signal">
+              Projects
+            </span>
+          </div>
+          <h2 className="text-3xl lg:text-[2.75rem] font-bold leading-[1.05] tracking-[-0.03em] text-forest">
+            Live products, not case studies.
           </h2>
-          <div className="w-12 h-1 bg-blue-500 mx-auto mt-2 rounded" />
+          <p className="mt-4 text-base leading-relaxed text-moss">
+            Everything here runs in production, and every layer of it is mine:
+            design, frontend, backend, deployment. Open them and click around.
+            Most of my other work is client software under NDA, so these are the
+            ones I can hand you a link to.
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-          {/* ── Project cards ── */}
-          {PROJECTS.map((project, index) => (
-            <motion.div
+        {/* Projects */}
+        <div className="mt-14 flex flex-col gap-16 lg:gap-20">
+          {PROJECTS.map((project, i) => (
+            <motion.article
               key={project.title}
-              initial={{ opacity: 0, y: 20 }}
+              className="grid lg:grid-cols-12 gap-8 lg:gap-14 items-center"
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.1 }}
-              className="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:-translate-y-1 hover:shadow-lg hover:border-blue-300 transition-all"
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.55, ease: "easeOut" }}
             >
-              {/* Top gradient strip */}
-              <div className={`bg-gradient-to-r ${project.gradient} h-1.5`} />
+              <div
+                className={`lg:col-span-7 ${
+                  i % 2 === 1 ? "lg:order-2" : ""
+                }`}
+              >
+                <Browser project={project} />
+              </div>
 
-              <div className="p-6">
-                {/* Badge row */}
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="bg-blue-50 text-blue-600 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wide border border-blue-100">
+              <div className="lg:col-span-5">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="rounded-full border border-edge bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-deep">
                     {project.category}
                   </span>
-                  {project.featured && (
-                    <span className="flex items-center gap-1 text-amber-500 text-xs font-medium">
-                      <Star size={11} fill="currentColor" /> Featured
-                    </span>
-                  )}
-                </div>
-
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <h3 className="text-lg font-bold text-slate-900">{project.title}</h3>
-                  <span className="flex items-center gap-1 text-slate-400 text-[11px] font-medium whitespace-nowrap flex-shrink-0">
-                    <Calendar size={11} />
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-mint/40 bg-mint/10 px-3 py-1 text-[11px] font-bold text-forest">
+                    <span className="h-1.5 w-1.5 rounded-full bg-mint" />
+                    Live
+                  </span>
+                  <span className="text-[11px] font-medium text-soft">
                     {project.date}
                   </span>
                 </div>
-                <p className="text-slate-400 text-xs font-medium mb-3">{project.subtitle}</p>
-                <p className="text-slate-500 text-sm leading-relaxed mb-5">
+
+                <h3 className="mt-4 text-3xl font-bold leading-[1.1] tracking-[-0.03em] text-forest">
+                  {project.title}
+                </h3>
+                <p className="mt-1 text-base font-medium text-moss">
+                  {project.subtitle}
+                </p>
+                <p className="mt-4 text-sm leading-relaxed text-moss">
                   {project.description}
                 </p>
 
-                {/* Tech pills */}
-                <div className="flex flex-wrap gap-2 mb-6">
+                <ul className="mt-5 grid sm:grid-cols-2 gap-x-5 gap-y-2.5">
+                  {project.highlights.map((point) => (
+                    <li
+                      key={point}
+                      className="flex items-start gap-2.5 text-sm leading-snug text-deep"
+                    >
+                      <span className="mt-[7px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-signal" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-6 flex flex-wrap gap-2">
                   {project.tech.map((tech) => (
                     <span
-                      key={tech.name}
-                      className="bg-slate-50 text-slate-600 border border-slate-200 text-xs rounded-full px-3 py-1 flex items-center gap-1.5 font-medium"
+                      key={tech}
+                      className="rounded-full border border-edge bg-white px-3 py-1 text-xs font-medium text-moss"
                     >
-                      {tech.icon && (
-                        <img
-                          src={`${DEVICON_BASE}${tech.icon}`}
-                          alt={tech.name}
-                          width={13}
-                          height={13}
-                        />
-                      )}
-                      {tech.name}
+                      {tech}
                     </span>
                   ))}
                 </div>
 
-                {/* Buttons */}
-                <div className="flex gap-3">
+                <div className="mt-7 flex flex-wrap items-center gap-3">
                   <a
                     href={project.liveDemo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium px-4 py-2.5 rounded-xl transition-colors min-h-[44px]"
+                    className="group inline-flex min-h-[44px] items-center gap-2 rounded-full bg-signal px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_26px_-12px_rgba(255,90,36,0.85)] transition-colors hover:bg-signal-hi focus:outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2"
                   >
-                    <ExternalLink size={13} />
-                    Live Demo
+                    Open live app
+                    <ArrowUpRight
+                      size={16}
+                      className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    />
                   </a>
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 border border-slate-200 hover:border-slate-400 text-slate-700 text-sm font-medium px-4 py-2.5 rounded-xl transition-colors min-h-[44px]"
+                    className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-edge bg-white px-5 py-3 text-sm font-semibold text-deep transition-colors hover:border-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2"
                   >
-                    <GithubIcon width={13} height={13} />
-                    GitHub
+                    <GithubIcon width={15} height={15} />
+                    Source
                   </a>
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
+        </div>
 
-          {/* ── Coming soon card ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: PROJECTS.length * 0.1 }}
-            className="relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl overflow-hidden"
-          >
-            {/* Decorative orbs */}
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-500 rounded-full opacity-10 blur-2xl pointer-events-none" />
-            <div className="absolute -bottom-10 -left-8 w-36 h-36 bg-violet-500 rounded-full opacity-10 blur-2xl pointer-events-none" />
-
-            {/* Subtle grid */}
-            <div
-              className="absolute inset-0 opacity-5"
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)",
-                backgroundSize: "28px 28px",
-              }}
-            />
-
-            <div className="relative p-6 flex flex-col h-full min-h-[360px]">
-              {/* Header */}
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center">
-                  <Rocket size={18} className="text-blue-400" />
-                </div>
-                <div>
-                  <p className="text-white font-bold text-sm">More Projects</p>
-                  <p className="text-slate-400 text-xs">Work samples available on request</p>
-                </div>
-                <span className="ml-auto flex items-center gap-1.5 bg-white/10 border border-white/15 text-green-400 text-[10px] font-semibold px-2.5 py-1 rounded-full">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                  In Progress
+        {/* The work that can't be linked */}
+        <motion.div
+          className="mt-16 rounded-3xl bg-forest p-8 sm:p-10 text-bone"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
+            <div className="flex-1">
+              <div className="flex items-center gap-2.5">
+                <Lock size={15} className="text-citrus" />
+                <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-citrus">
+                  Under NDA
                 </span>
               </div>
-
-              {/* Body */}
-              <div className="flex-1 flex items-center">
-                <p className="text-slate-300 text-sm leading-relaxed">
-                  I&apos;ve shipped <span className="text-white font-semibold">10+ production projects</span> across healthcare, real estate, hospitality, and e-commerce, most under <span className="text-white font-semibold">NDA</span> as part of my professional work at SolGuruz.
-                </p>
-              </div>
-
-              {/* Footer CTA */}
-              <div className="mt-6 pt-5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
-                <p className="text-slate-400 text-xs">
-                  Interested in seeing my work?
-                </p>
-                <a
-                  href="https://mail.google.com/mail/?view=cm&to=yagnesh6202patel@gmail.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 bg-blue-500 hover:bg-blue-400 text-white text-xs font-semibold px-3.5 py-2 rounded-lg transition-colors whitespace-nowrap"
-                >
-                  Request Samples <ArrowRight size={12} />
-                </a>
-              </div>
+              <h3 className="mt-4 text-2xl font-bold tracking-[-0.02em] sm:text-[1.75rem]">
+                Most of what I&apos;ve built lives behind a login.
+              </h3>
+              <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-bone/75">
+                Nurse platforms, hotel systems, real estate portals, an AI
+                healthcare tool, a flight booking build. Admin panels and
+                internal tools, all under NDA, so there&apos;s no link to hand
+                you. A 30-minute call is the fastest way to see what I actually
+                did, and anything you hand me gets the same discretion.
+              </p>
             </div>
-          </motion.div>
 
-        </div>
+            <a
+              href="#contact"
+              className="group inline-flex min-h-[44px] flex-shrink-0 items-center gap-2 self-start rounded-full bg-citrus px-6 py-3 text-sm font-bold text-forest transition-colors hover:bg-white lg:self-auto"
+            >
+              Ask for a walkthrough
+              <ArrowRight
+                size={16}
+                className="transition-transform group-hover:translate-x-1"
+              />
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

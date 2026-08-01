@@ -2,17 +2,18 @@
 
 import { motion } from "motion/react";
 import { useMemo } from "react";
-import { GitBranch } from "lucide-react";
+import { Lock } from "lucide-react";
 import ContributionGraph from "@/components/ContributionGraph";
 import activity from "@/data/gitlab-activity.json";
 
-// Site-blue scale so the heatmap matches the rest of the page.
+// Bone → forest ramp, so the heatmap belongs to the page instead of importing
+// GitHub's green or the old site blue.
 const COLOR_SCALE: [string, string, string, string, string] = [
-  "#eef1f6",
-  "#c8d3f5",
-  "#8ba4e8",
-  "#5069cf",
-  "#26327e",
+  "#EAE7DC",
+  "#CBE7D9",
+  "#8FCFB4",
+  "#35A277",
+  "#0F4A38",
 ];
 
 const WEEKS = 53;
@@ -33,69 +34,146 @@ function dateRangeLabel(data: Record<string, number>): string {
   return start === end ? start : `${start} – ${end}`;
 }
 
+const utc = (key: string) => {
+  const [y, m, d] = key.split("-").map(Number);
+  return Date.UTC(y, m - 1, d);
+};
+
+const DAY = 86_400_000;
+
 export default function Activity() {
   const data = activity as Record<string, number>;
   const range = useMemo(() => dateRangeLabel(data), [data]);
 
+  // Everything below is computed from the same snapshot the heatmap draws.
+  const stats = useMemo(() => {
+    const days = Object.entries(data)
+      .filter(([, v]) => v > 0)
+      .sort(([a], [b]) => a.localeCompare(b));
+
+    let total = 0;
+    let best = { key: "", count: 0 };
+
+    for (const [key, count] of days) {
+      total += count;
+      if (count > best.count) best = { key, count };
+    }
+
+    // Calendar days covered by the snapshot, so "days with commits" has a base.
+    const span =
+      days.length > 1
+        ? Math.round((utc(days[days.length - 1][0]) - utc(days[0][0])) / DAY) + 1
+        : days.length;
+
+    const bestLabel = best.key
+      ? (() => {
+          const [y, m, d] = best.key.split("-").map(Number);
+          return `${MONTHS[m - 1]} ${d}, ${y}`;
+        })()
+      : "";
+
+    const activeDays = days.length;
+    const perDay = activeDays ? Math.round(total / activeDays) : 0;
+
+    return { total, activeDays, span, perDay, best, bestLabel };
+  }, [data]);
+
+  const CARDS = [
+    { value: stats.total.toLocaleString(), label: "Contributions" },
+    {
+      value: stats.activeDays.toLocaleString(),
+      label: `Days with commits, of ${stats.span}`,
+    },
+    { value: `${stats.perDay}`, label: "Average on an active day" },
+    { value: `${stats.best.count}`, label: `Busiest day · ${stats.bestLabel}` },
+  ];
+
   return (
-    <section id="activity" className="py-16 md:py-20 bg-slate-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+    <section id="activity" className="py-24 bg-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Heading */}
         <motion.div
-          className="text-center mb-10 md:mb-14"
+          className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
-            Coding Activity
-          </h2>
-          <div className="w-12 h-1 bg-blue-500 mx-auto mt-2 rounded" />
-          <p className="text-slate-500 text-sm sm:text-base mt-4 max-w-2xl mx-auto leading-relaxed">
-            Most of my day-to-day work lives on a private GitLab, not GitHub.
-            That&apos;s why my public GitHub looks quiet. This is a snapshot of
-            the real activity.
-          </p>
+          <div className="max-w-2xl">
+            <div className="mb-5 flex items-center gap-3">
+              <span className="h-[2px] w-10 bg-signal" />
+              <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-signal">
+                Activity
+              </span>
+            </div>
+            <h2 className="text-3xl lg:text-[2.75rem] font-bold leading-[1.05] tracking-[-0.03em] text-forest">
+              My GitHub is quiet. My work isn&apos;t.
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-moss">
+              Almost all of my day-to-day work lives on a private company GitLab,
+              which no public profile will ever show you. This is that activity,
+              exported straight from it.
+            </p>
+          </div>
+
+          <span className="inline-flex flex-shrink-0 items-center gap-2 rounded-full border border-edge bg-bone px-4 py-2 text-sm font-medium text-deep">
+            <Lock size={14} className="text-soft" />
+            Private GitLab &middot; snapshot
+          </span>
         </motion.div>
 
-        {/* Card */}
+        {/* Panel */}
         <motion.div
-          className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden"
+          className="mt-12 overflow-hidden rounded-3xl border border-edge bg-bone"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.05 }}
         >
-          <div className="h-1 w-full bg-gradient-to-r from-blue-500 to-indigo-500" />
-
-          <div className="p-4 sm:p-6">
-            {/* Header row */}
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center flex-shrink-0">
-                <GitBranch size={16} className="text-white" />
-              </div>
-              <div>
-                <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-tight">
-                  Contribution Graph
-                </h3>
-                <p className="text-slate-500 text-xs sm:text-sm mt-0.5">
-                  Issues, merge requests, pushes &amp; comments
-                  {range && <span> · {range}</span>}
-                </p>
-              </div>
+          <div className="p-6 sm:p-8">
+            <div className="mb-6 flex flex-wrap items-baseline justify-between gap-2">
+              <h3 className="text-base font-bold tracking-[-0.01em] text-forest">
+                Issues, merge requests, pushes and comments
+              </h3>
+              {range && (
+                <span className="text-sm text-soft">{range}</span>
+              )}
             </div>
 
-            {/* Heatmap */}
             <div className="flex justify-center">
               <ContributionGraph
                 data={data}
                 weeks={WEEKS}
                 colorScale={COLOR_SCALE}
+                textColor="#8A9689"
                 showTotal={false}
+                blockSize={13}
+                blockMargin={3}
+                blockRadius={3}
                 title={range ? `contributions · ${range}` : "contributions in the last year"}
               />
             </div>
+          </div>
+
+          {/* Stats read from the same snapshot */}
+          <div className="grid grid-cols-2 border-t border-edge bg-white sm:grid-cols-4">
+            {CARDS.map((card, i) => (
+              <div
+                key={card.label}
+                className={`px-6 py-5 ${
+                  i > 0 ? "border-l border-edge" : ""
+                } ${i > 1 ? "border-t sm:border-t-0" : ""} ${
+                  i === 2 ? "border-l-0 sm:border-l" : ""
+                }`}
+              >
+                <span className="block text-2xl font-bold tracking-[-0.02em] text-forest tabular-nums">
+                  {card.value}
+                </span>
+                <span className="mt-1 block text-xs font-medium leading-tight text-soft">
+                  {card.label}
+                </span>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>

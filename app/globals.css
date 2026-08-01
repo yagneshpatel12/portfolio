@@ -11,6 +11,19 @@
   --font-sans: "GeistSans", sans-serif;
   --radius-card: 12px;
   --radius-btn: 8px;
+
+  /* ── Bone / forest / orange palette (hero first, rest of the site to follow) ── */
+  --color-bone: #F7F5EF;      /* canvas */
+  --color-forest: #0B3B2E;    /* headings, dark surfaces */
+  --color-deep: #0E2A21;      /* strong body text */
+  --color-moss: #5F6F63;      /* body copy */
+  --color-soft: #8A9689;      /* captions, muted detail */
+  --color-edge: #E3DFD1;      /* hairlines, card borders */
+  --color-signal: #FF5A24;    /* anything clickable + accent words */
+  --color-signal-hi: #E64A16; /* signal hover */
+  --color-citrus: #FFC12B;    /* highlight, ambient warmth */
+  --color-mint: #12B886;      /* live status only */
+  --color-alert: #B3261E;     /* validation errors, kept apart from signal */
 }
 
 html {
