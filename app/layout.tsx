@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { GeistSans } from "geist/font/sans";
 import Script from "next/script";
 import "./globals.css";
@@ -8,13 +8,22 @@ const GA_ID = "G-M281BMHP3C";
 
 const BASE_URL = "https://www.yagneshpateldev.com";
 
-const DESCRIPTION = `Frontend & Full-Stack Developer with ${experienceLabel().phrase} shipping real products. Strong on React & Next.js, capable across the full stack. Open to remote roles globally.`;
+const TITLE = "Yagnesh Patel | Full-Stack Developer & Web Product Partner";
+
+const DESCRIPTION = `I design, build, deploy and hand over complete web products. ${
+  experienceLabel().phrase
+} shipping React, Next.js and Node apps. Freelance, contract or full-time.`;
+
+export const viewport: Viewport = {
+  themeColor: "#F7F5EF",
+  colorScheme: "light",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
 
   title: {
-    default: "Yagnesh Patel | Frontend & Full-Stack Developer | React · Next.js · Node.js",
+    default: TITLE,
     template: "%s | Yagnesh Patel",
   },
 
@@ -22,23 +31,21 @@ export const metadata: Metadata = {
 
   keywords: [
     "Yagnesh Patel",
-    "Frontend Developer",
-    "Full-Stack Developer",
-    "React Developer",
-    "Next.js Developer",
-    "Node.js Developer",
-    "TypeScript Developer",
-    "hire React developer",
-    "hire frontend developer India",
-    "remote React developer",
-    "remote frontend developer",
-    "React developer India",
-    "Next.js developer India",
-    "full stack developer India",
-    "software engineer India",
-    "SolGuruz",
+    "full stack developer",
+    "freelance full stack developer",
+    "freelance web developer India",
+    "hire full stack developer India",
+    "React developer",
+    "Next.js developer",
+    "Node.js developer",
+    "TypeScript developer",
+    "end to end web development",
+    "MVP development",
+    "build a web app",
+    "remote developer India",
     "AI integration developer",
     "OpenAI API developer",
+    "Claude API developer",
   ],
 
   authors: [{ name: "Yagnesh Patel", url: BASE_URL }],
@@ -49,25 +56,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: BASE_URL,
-    siteName: "Yagnesh Patel · Portfolio",
-    title: "Yagnesh Patel | Frontend & Full-Stack Developer",
+    siteName: "Yagnesh Patel",
+    title: TITLE,
     description: DESCRIPTION,
-    images: [
-      {
-        url: `${BASE_URL}/images/profile.jpg`,
-        width: 800,
-        height: 800,
-        alt: "Yagnesh Patel, Frontend & Full-Stack Developer",
-      },
-    ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Yagnesh Patel | Frontend & Full-Stack Developer",
+    title: TITLE,
     description: DESCRIPTION,
     creator: "@yagneshpatel",
-    images: [`${BASE_URL}/images/profile.jpg`],
   },
 
   alternates: {
@@ -102,7 +100,7 @@ export default function RootLayout({
 }>) {
   return (
    <html lang="en" className={`${GeistSans.variable} h-full antialiased`}>
-      <body className="min-h-full bg-[#FAFAFA] font-sans">
+      <body className="min-h-full bg-bone font-sans">
         {children}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}

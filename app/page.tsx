@@ -20,8 +20,8 @@ const jsonLd = {
   email: "yagnesh6202patel@gmail.com",
   telephone: "+919328406174",
   image: "https://www.yagneshpateldev.com/images/profile.jpg",
-  jobTitle: "Frontend & Full-Stack Developer",
-  description: `Frontend & Full-Stack Developer with ${experienceLabel().phrase} building production web apps in React, Next.js, and Node.js. Open to global remote, hybrid, and onsite roles.`,
+  jobTitle: "Full-Stack Developer",
+  description: `Full-stack developer who designs, builds, deploys and hands over complete web products. ${experienceLabel().phrase} shipping production apps in React, Next.js and Node.js. Available for freelance projects, contracts and full-time roles, worldwide.`,
   address: {
     "@type": "PostalAddress",
     addressLocality: "Visnagar",
@@ -42,9 +42,29 @@ const jsonLd = {
     "PostgreSQL",
     "Tailwind CSS",
     "OpenAI API",
+    "Claude API",
+    "Model Context Protocol",
     "Full-Stack Development",
     "Frontend Development",
+    "Web Application Deployment",
   ],
+
+  // Mirrors the Certifications section, so the structured data matches what a
+  // visitor can actually see and verify.
+  hasCredential: [
+    ["Building with the Claude API", "nqamtohvne9c"],
+    ["Introduction to Model Context Protocol", "w5fxuqiaqnsz"],
+    ["Introduction to Agent Skills", "vautracw58vy"],
+    ["Claude Code in Action", "qaht2jxzfooj"],
+    ["AI Fluency: Framework & Foundations", "cg95ggoj265e"],
+    ["Claude 101", "usm6j76preqz"],
+  ].map(([name, code]) => ({
+    "@type": "EducationalOccupationalCredential",
+    name,
+    credentialCategory: "certificate",
+    url: `https://verify.skilljar.com/c/${code}`,
+    recognizedBy: { "@type": "Organization", name: "Anthropic" },
+  })),
   alumniOf: {
     "@type": "CollegeOrUniversity",
     name: "Sankalchand Patel University",
@@ -74,12 +94,14 @@ export default function Home() {
         <div className="relative z-10" style={{ isolation: "isolate" }}>
           <Navbar />
           <Hero />
+          {/* Promise, then proof, then capability: a founder wants something
+              clickable long before a skills list. */}
           <About />
-          <Skills />
-          <Certifications />
+          <Projects />
           <Experience />
           <Activity />
-          <Projects />
+          <Skills />
+          <Certifications />
           <Contact />
           <Footer />
         </div>
