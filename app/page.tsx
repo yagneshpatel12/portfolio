@@ -8,7 +8,6 @@ import Activity from "@/components/Activity";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import ParticlesBackground from "@/components/ParticlesBackground";
 import { experienceLabel } from "@/lib/experience";
 
 const jsonLd = {
@@ -89,22 +88,19 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <main className="relative">
-        <ParticlesBackground />
-        <div className="relative z-10" style={{ isolation: "isolate" }}>
-          <Navbar />
-          <Hero />
-          {/* Promise, then proof, then capability: a founder wants something
-              clickable long before a skills list. */}
-          <About />
-          <Projects />
-          <Experience />
-          <Activity />
-          <Skills />
-          <Certifications />
-          <Contact />
-          <Footer />
-        </div>
+      <main>
+        <Navbar />
+        <Hero />
+        {/* Promise, then proof, then capability: a founder wants something
+            clickable long before a skills list. */}
+        <About />
+        <Projects />
+        <Experience />
+        <Activity />
+        <Skills />
+        <Certifications />
+        <Contact />
+        <Footer />
       </main>
     </>
   );
