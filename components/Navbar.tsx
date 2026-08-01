@@ -62,24 +62,20 @@ export default function Navbar() {
       }`}
     >
       <nav className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
+        {/* Wordmark. The name is the mark; the monogram lives in the favicon,
+            the OG card and the footer, where there's no room for a name. */}
         <a
           href="#"
           onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-          className="flex items-center gap-2.5 group"
+          aria-label="Yagnesh Patel, back to top"
+          className="group flex flex-col gap-[3px] rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-4"
         >
-          {/* Monogram badge */}
-          <span className="w-8 h-8 rounded-lg bg-forest flex items-center justify-center text-bone text-xs font-bold tracking-tight shadow-sm group-hover:shadow-md group-hover:shadow-forest/30 transition-shadow flex-shrink-0">
-            YP
+          <span className="flex items-baseline gap-[3px] text-[15px] font-bold leading-none tracking-[-0.02em] text-deep">
+            Yagnesh Patel
+            <span className="h-[5px] w-[5px] rounded-full bg-signal transition-transform duration-300 group-hover:scale-[1.6]" />
           </span>
-          {/* Name + tagline */}
-          <span className="flex flex-col leading-none">
-            <span className="font-bold text-sm tracking-tight text-deep">
-              Yagnesh Patel
-            </span>
-            <span className="text-[10px] font-medium tracking-wide text-soft">
-              Design to deploy, end to end
-            </span>
+          <span className="text-[10px] font-medium leading-none tracking-[0.02em] text-soft">
+            Design to deploy, end to end
           </span>
         </a>
 
