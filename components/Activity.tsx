@@ -89,7 +89,7 @@ export default function Activity() {
   ];
 
   return (
-    <section id="activity" className="py-24 bg-white">
+    <section id="activity" className="py-24 bg-bone">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Heading */}
         <motion.div
@@ -116,7 +116,7 @@ export default function Activity() {
             </p>
           </div>
 
-          <span className="inline-flex flex-shrink-0 items-center gap-2 rounded-full border border-edge bg-bone px-4 py-2 text-sm font-medium text-deep">
+          <span className="inline-flex flex-shrink-0 items-center gap-2 rounded-full border border-edge bg-white px-4 py-2 text-sm font-medium text-deep">
             <Lock size={14} className="text-soft" />
             Private GitLab &middot; snapshot
           </span>
@@ -124,7 +124,7 @@ export default function Activity() {
 
         {/* Panel */}
         <motion.div
-          className="mt-12 overflow-hidden rounded-3xl border border-edge bg-bone"
+          className="mt-12 overflow-hidden rounded-3xl border border-edge bg-white"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
@@ -156,7 +156,7 @@ export default function Activity() {
           </div>
 
           {/* Stats read from the same snapshot */}
-          <div className="grid grid-cols-2 border-t border-edge bg-white sm:grid-cols-4">
+          <div className="grid grid-cols-2 border-t border-edge bg-bone sm:grid-cols-4">
             {CARDS.map((card, i) => (
               <div
                 key={card.label}

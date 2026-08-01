@@ -89,7 +89,7 @@ const rowVariants: Variants = {
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 bg-bone">
+    <section id="skills" className="py-24 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Heading */}
         <motion.div
@@ -138,7 +138,7 @@ export default function Skills() {
                 {cap.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-edge bg-white px-3.5 py-1.5 text-sm font-medium text-deep hover:border-signal hover:text-signal transition-colors"
+                    className="rounded-full border border-edge bg-bone px-3.5 py-1.5 text-sm font-medium text-deep hover:border-signal hover:text-signal transition-colors"
                   >
                     {tag}
                   </span>

@@ -71,7 +71,7 @@ const codeOf = (link: string) =>
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="py-24 bg-white">
+    <section id="certifications" className="py-24 bg-bone">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Heading */}
         <motion.div
@@ -104,7 +104,7 @@ export default function Certifications() {
             {[claude101Img, mcpImg, claudeApiImg].map((img, i) => (
               <div
                 key={i}
-                className="absolute top-1/2 left-1/2 w-[172px] overflow-hidden rounded-xl border border-edge bg-bone shadow-lg shadow-forest/10 transition-transform duration-500"
+                className="absolute top-1/2 left-1/2 w-[172px] overflow-hidden rounded-xl border border-edge bg-white shadow-lg shadow-forest/10 transition-transform duration-500"
                 style={{
                   transform: `translate(-50%, -50%) rotate(${
                     (i - 1) * 7
@@ -122,7 +122,7 @@ export default function Certifications() {
                 />
               </div>
             ))}
-            <span className="absolute -bottom-1 left-1/2 z-10 inline-flex -translate-x-1/2 items-center gap-2 rounded-full border border-edge bg-white px-3.5 py-1.5 text-xs font-semibold text-deep shadow-sm">
+            <span className="absolute -bottom-1 left-1/2 z-10 inline-flex -translate-x-1/2 items-center gap-2 rounded-full border border-edge bg-white px-3.5 py-1.5 text-xs font-semibold text-deep shadow-md">
               <BadgeCheck size={14} className="text-mint" />
               6 verified
             </span>
@@ -141,7 +141,7 @@ export default function Certifications() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.45, ease: "easeOut", delay: i * 0.05 }}
-              className="group grid grid-cols-1 lg:grid-cols-12 items-center gap-x-6 gap-y-3 border-b border-edge px-3 -mx-3 py-5 rounded-lg transition-colors hover:bg-bone focus:outline-none focus-visible:ring-2 focus-visible:ring-signal"
+              className="group grid grid-cols-1 lg:grid-cols-12 items-center gap-x-6 gap-y-3 border-b border-edge px-3 -mx-3 py-5 rounded-lg transition-colors hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-signal"
             >
               <div className="lg:col-span-7 flex items-start gap-3.5">
                 <BadgeCheck

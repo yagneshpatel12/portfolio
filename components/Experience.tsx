@@ -128,7 +128,7 @@ const JOBS: Job[] = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 bg-bone">
+    <section id="experience" className="py-24 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Heading */}
         <motion.div
@@ -198,7 +198,7 @@ export default function Experience() {
                   {job.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full border border-edge bg-white px-3 py-1 text-xs font-medium text-deep"
+                      className="rounded-full border border-edge bg-bone px-3 py-1 text-xs font-medium text-deep"
                     >
                       {tag}
                     </span>
