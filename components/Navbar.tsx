@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
 
@@ -15,14 +15,13 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const lastScrollY = useRef(0);
   const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const prev = lastScrollY.current;
-    setScrolled(latest > 24);
+  // The bar never hides: on a page whose job is one click, the CTA should
+  // always be reachable.
+  useMotionValueEvent(scrollY, "change", () => {
+    setScrolled(scrollY.get() > 24);
 
     // Active link: the last linked section whose top has crossed a line a third
     // of the way down the viewport and hasn't scrolled off the top yet.
@@ -34,21 +33,9 @@ export default function Navbar() {
       if (rect && rect.top <= line && rect.bottom > 80) current = id;
     }
     setActiveSection(current);
-
-    // Never hide while mobile menu is open
-    if (isOpen) {
-      lastScrollY.current = latest;
-      return;
-    }
-    if (latest > prev && latest > 80) {
-      setHidden(true);
-    } else {
-      setHidden(false);
-    }
-    lastScrollY.current = latest;
   });
 
-  // Over the dark hero the bar is transparent; it turns solid once past it.
+  // Transparent over the hero, bone glass once past it.
   const solid = scrolled || isOpen;
 
   const handleNavClick = (href: string) => {
@@ -67,9 +54,7 @@ export default function Navbar() {
   };
 
   return (
-    <motion.header
-      animate={{ y: hidden ? "-100%" : "0%" }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
+    <header
       className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
         solid
           ? "backdrop-blur-md bg-bone/85 border-b border-edge"
@@ -179,6 +164,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
 }
