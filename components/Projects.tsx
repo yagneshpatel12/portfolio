@@ -12,12 +12,58 @@ interface TechItem {
   icon?: string;
 }
 
-const PROJECT_TECH: TechItem[] = [
-  { name: "React.js", icon: "react/react-original.svg" },
-  { name: "Node.js", icon: "nodejs/nodejs-original.svg" },
-  { name: "MongoDB", icon: "mongodb/mongodb-original.svg" },
-  { name: "Cloudinary" },
-  { name: "REST API" },
+interface Project {
+  title: string;
+  subtitle: string;
+  category: string;
+  featured: boolean;
+  date: string;
+  description: string;
+  tech: TechItem[];
+  liveDemo: string;
+  github: string;
+  gradient: string;
+}
+
+const PROJECTS: Project[] = [
+  {
+    title: "GymFlow",
+    subtitle: "Gym Management SaaS",
+    category: "Full Stack",
+    featured: true,
+    date: "2026",
+    description:
+      "Production-quality gym management SaaS with a marketing landing site, real JWT auth, and an admin dashboard. Owners manage members, class schedules, attendance check-ins, trainers, and membership plans, with KPI charts and progress photos stored in MongoDB.",
+    tech: [
+      { name: "Next.js 16", icon: "nextjs/nextjs-original.svg" },
+      { name: "React 19", icon: "react/react-original.svg" },
+      { name: "TypeScript", icon: "typescript/typescript-original.svg" },
+      { name: "MongoDB", icon: "mongodb/mongodb-original.svg" },
+      { name: "Tailwind CSS", icon: "tailwindcss/tailwindcss-original.svg" },
+    ],
+    liveDemo: "https://getgymflow.vercel.app/",
+    github: "https://github.com/yagneshpatel12/GymFlow",
+    gradient: "from-emerald-500 to-teal-500",
+  },
+  {
+    title: "Digital Society",
+    subtitle: "Society Management Web App",
+    category: "Full Stack",
+    featured: true,
+    date: "Oct 2021",
+    description:
+      "Full stack platform with role-based admin panel for managing society members, families, events, complaints, and advertisements. Secured with JWT + OTP authentication.",
+    tech: [
+      { name: "React.js", icon: "react/react-original.svg" },
+      { name: "Node.js", icon: "nodejs/nodejs-original.svg" },
+      { name: "MongoDB", icon: "mongodb/mongodb-original.svg" },
+      { name: "Cloudinary" },
+      { name: "REST API" },
+    ],
+    liveDemo: "https://society-management.onrender.com/",
+    github: "https://github.com/yagneshpatel12/society-management-webapp",
+    gradient: "from-blue-500 to-indigo-500",
+  },
 ];
 
 
@@ -41,92 +87,95 @@ export default function Projects() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-          {/* ── Project card ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:-translate-y-1 hover:shadow-lg hover:border-blue-300 transition-all"
-          >
-            {/* Top gradient strip */}
-            <div className="bg-gradient-to-r from-blue-500 to-indigo-500 h-1.5" />
+          {/* ── Project cards ── */}
+          {PROJECTS.map((project, index) => (
+            <motion.div
+              key={project.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.1 }}
+              className="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:-translate-y-1 hover:shadow-lg hover:border-blue-300 transition-all"
+            >
+              {/* Top gradient strip */}
+              <div className={`bg-gradient-to-r ${project.gradient} h-1.5`} />
 
-            <div className="p-6">
-              {/* Badge row */}
-              <div className="flex items-center gap-2 mb-4">
-                <span className="bg-blue-50 text-blue-600 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wide border border-blue-100">
-                  Full Stack
-                </span>
-                <span className="flex items-center gap-1 text-amber-500 text-xs font-medium">
-                  <Star size={11} fill="currentColor" /> Featured
-                </span>
-              </div>
-
-              <div className="flex items-center justify-between gap-2 mb-2">
-                <h3 className="text-lg font-bold text-slate-900">Digital Society</h3>
-                <span className="flex items-center gap-1 text-slate-400 text-[11px] font-medium whitespace-nowrap flex-shrink-0">
-                  <Calendar size={11} />
-                  Oct 2021
-                </span>
-              </div>
-              <p className="text-slate-400 text-xs font-medium mb-3">Society Management Web App</p>
-              <p className="text-slate-500 text-sm leading-relaxed mb-5">
-                Full stack platform with role-based admin panel for managing
-                society members, families, events, complaints, and
-                advertisements. Secured with JWT + OTP authentication.
-              </p>
-
-              {/* Tech pills */}
-              <div className="flex flex-wrap gap-2 mb-6">
-                {PROJECT_TECH.map((tech) => (
-                  <span
-                    key={tech.name}
-                    className="bg-slate-50 text-slate-600 border border-slate-200 text-xs rounded-full px-3 py-1 flex items-center gap-1.5 font-medium"
-                  >
-                    {tech.icon && (
-                      <img
-                        src={`${DEVICON_BASE}${tech.icon}`}
-                        alt={tech.name}
-                        width={13}
-                        height={13}
-                      />
-                    )}
-                    {tech.name}
+              <div className="p-6">
+                {/* Badge row */}
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="bg-blue-50 text-blue-600 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wide border border-blue-100">
+                    {project.category}
                   </span>
-                ))}
-              </div>
+                  {project.featured && (
+                    <span className="flex items-center gap-1 text-amber-500 text-xs font-medium">
+                      <Star size={11} fill="currentColor" /> Featured
+                    </span>
+                  )}
+                </div>
 
-              {/* Buttons */}
-              <div className="flex gap-3">
-                <a
-                  href="https://society-management.onrender.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium px-4 py-2.5 rounded-xl transition-colors min-h-[44px]"
-                >
-                  <ExternalLink size={13} />
-                  Live Demo
-                </a>
-                <a
-                  href="https://github.com/yagneshpatel12/society-management-webapp"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 border border-slate-200 hover:border-slate-400 text-slate-700 text-sm font-medium px-4 py-2.5 rounded-xl transition-colors min-h-[44px]"
-                >
-                  <GithubIcon width={13} height={13} />
-                  GitHub
-                </a>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <h3 className="text-lg font-bold text-slate-900">{project.title}</h3>
+                  <span className="flex items-center gap-1 text-slate-400 text-[11px] font-medium whitespace-nowrap flex-shrink-0">
+                    <Calendar size={11} />
+                    {project.date}
+                  </span>
+                </div>
+                <p className="text-slate-400 text-xs font-medium mb-3">{project.subtitle}</p>
+                <p className="text-slate-500 text-sm leading-relaxed mb-5">
+                  {project.description}
+                </p>
+
+                {/* Tech pills */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.tech.map((tech) => (
+                    <span
+                      key={tech.name}
+                      className="bg-slate-50 text-slate-600 border border-slate-200 text-xs rounded-full px-3 py-1 flex items-center gap-1.5 font-medium"
+                    >
+                      {tech.icon && (
+                        <img
+                          src={`${DEVICON_BASE}${tech.icon}`}
+                          alt={tech.name}
+                          width={13}
+                          height={13}
+                        />
+                      )}
+                      {tech.name}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Buttons */}
+                <div className="flex gap-3">
+                  <a
+                    href={project.liveDemo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium px-4 py-2.5 rounded-xl transition-colors min-h-[44px]"
+                  >
+                    <ExternalLink size={13} />
+                    Live Demo
+                  </a>
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 border border-slate-200 hover:border-slate-400 text-slate-700 text-sm font-medium px-4 py-2.5 rounded-xl transition-colors min-h-[44px]"
+                  >
+                    <GithubIcon width={13} height={13} />
+                    GitHub
+                  </a>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          ))}
 
           {/* ── Coming soon card ── */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: PROJECTS.length * 0.1 }}
             className="relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl overflow-hidden"
           >
             {/* Decorative orbs */}
