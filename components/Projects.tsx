@@ -93,9 +93,11 @@ function Browser({ project }: { project: Project }) {
         />
       </div>
 
-      {/* Viewport — contain, so a wide capture letterboxes instead of losing its right edge */}
+      {/* Viewport — 2.15:1 matches how the shots are captured, so they fill the
+          frame edge to edge. Still contain, so an odd-sized capture letterboxes
+          instead of losing its right edge. */}
       <div
-        className={`relative aspect-[16/10] ${showShot ? "bg-white" : "bg-bone"}`}
+        className={`relative aspect-[43/20] ${showShot ? "bg-white" : "bg-bone"}`}
       >
         {showShot ? (
           <Image
