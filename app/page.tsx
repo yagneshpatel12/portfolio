@@ -18,7 +18,7 @@ const jsonLd = {
   url: "https://www.yagneshpateldev.com",
   email: "yagnesh6202patel@gmail.com",
   telephone: "+919328406174",
-  image: "https://www.yagneshpateldev.com/images/profile.jpg",
+  image: "https://www.yagneshpateldev.com/images/profile-v2.jpg",
   jobTitle: "Full-Stack Developer",
   description: `Full-stack developer who designs, builds, deploys and hands over complete web products. ${experienceLabel().phrase} shipping production apps in React, Next.js and Node.js. Available for freelance projects, contracts and full-time roles, worldwide.`,
   address: {

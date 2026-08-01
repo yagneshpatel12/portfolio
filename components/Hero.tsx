@@ -176,7 +176,7 @@ export default function Hero() {
                 >
                   <div className="relative aspect-[4/5] rounded-[28px] overflow-hidden border border-forest/15 bg-forest shadow-2xl shadow-forest/25">
                     <Image
-                      src="/images/profile.jpg"
+                      src="/images/profile-v2.jpg"
                       alt="Yagnesh Patel, full-stack developer"
                       fill
                       sizes="(max-width: 640px) 180px, (max-width: 1024px) 205px, 225px"
