@@ -246,7 +246,7 @@ export default function About() {
             </div>
 
             <p className="mt-6 pt-5 border-t border-edge text-sm text-soft">
-              Visnagar, India &middot; IST (UTC+5:30) &middot; English &middot; Slack,
+              Gujarat, India &middot; IST (UTC+5:30) &middot; English &middot; Slack,
               Teams or email
             </p>
           </div>

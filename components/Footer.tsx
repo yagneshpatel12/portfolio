@@ -132,7 +132,7 @@ export default function Footer() {
                 +91 93284 06174
               </a>
               <p className="mt-2 text-sm text-bone/45">
-                Visnagar, Gujarat, India
+                Gujarat, India
               </p>
 
               <div className="mt-4 flex items-center gap-2">

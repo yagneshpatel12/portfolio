@@ -6,7 +6,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 # yagneshpateldev.com
 
-Single-page portfolio for Yagnesh Patel, full-stack developer in Visnagar, India.
+Single-page portfolio for Yagnesh Patel, full-stack developer in Gujarat, India.
 Next.js 16 (App Router), Tailwind v4, `motion/react`, TypeScript, on Vercel.
 
 ```bash

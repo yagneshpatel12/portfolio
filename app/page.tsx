@@ -23,7 +23,6 @@ const jsonLd = {
   description: `Full-stack developer who designs, builds, deploys and hands over complete web products. ${experienceLabel().phrase} shipping production apps in React, Next.js and Node.js. Available for freelance projects, contracts and full-time roles, worldwide.`,
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Visnagar",
     addressRegion: "Gujarat",
     addressCountry: "IN",
   },

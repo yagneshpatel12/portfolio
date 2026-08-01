@@ -438,7 +438,7 @@ export default function Contact() {
             <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
               <span className="flex items-center gap-2 text-sm text-moss">
                 <MapPin size={14} className="flex-shrink-0 text-soft" />
-                Visnagar, Gujarat, India &middot; IST (UTC+5:30)
+                Gujarat, India &middot; IST (UTC+5:30)
               </span>
 
               <span className="flex items-center gap-2">
