@@ -198,11 +198,11 @@ export default function Hero() {
 
             {/* Pitch + CTAs */}
             <motion.div variants={fadeUp} className="lg:col-span-8 xl:col-span-9">
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-4">
                 <span className="text-lg sm:text-xl font-bold tracking-tight text-deep">
                   Yagnesh Patel
                 </span>
-                <span className="h-px w-8 bg-soft/70" />
+                <span aria-hidden className="h-1 w-1 rounded-full bg-soft/70" />
                 <span className="text-[15px] font-medium text-moss">
                   Full-stack developer, India
                 </span>
