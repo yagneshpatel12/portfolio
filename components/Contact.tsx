@@ -133,7 +133,7 @@ function FieldError({ id, children }: { id: string; children: string }) {
       role="alert"
       className="mt-1.5 flex items-start gap-1.5 text-[13px]/5 font-medium text-alert"
     >
-      <CircleAlert size={14} className="mt-[3px] shrink-0" />
+      <CircleAlert size={14} className="mt-[3px] flex-shrink-0" />
       {children}
     </p>
   );
@@ -711,7 +711,7 @@ export default function Contact() {
                 role="alert"
                 className="mt-5 flex items-start gap-2 rounded-xl border border-alert/30 bg-alert/5 px-4 py-3 text-[13px]/5 font-medium text-alert"
               >
-                <CircleAlert size={15} className="mt-[3px] shrink-0" />
+                <CircleAlert size={15} className="mt-[3px] flex-shrink-0" />
                 <span>
                   That didn&apos;t send. Try once more, or email me directly at{" "}
                   <a href={`mailto:${EMAIL}`} className="underline underline-offset-2">

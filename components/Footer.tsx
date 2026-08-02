@@ -53,24 +53,26 @@ export default function Footer() {
               deployed by one person.
             </p>
 
-            <a
-              href="#contact"
-              className="group mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-signal px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-signal-hi focus:outline-none focus-visible:ring-2 focus-visible:ring-citrus focus-visible:ring-offset-2 focus-visible:ring-offset-forest"
-            >
-              Start a project
-              <ArrowRight
-                size={16}
-                className="transition-transform group-hover:translate-x-1"
-              />
-            </a>
+            <div className="mt-6 flex flex-col items-start gap-5">
+              <a
+                href="#contact"
+                className="group inline-flex min-h-[44px] items-center gap-2 rounded-full bg-signal px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-signal-hi focus:outline-none focus-visible:ring-2 focus-visible:ring-citrus focus-visible:ring-offset-2 focus-visible:ring-offset-forest"
+              >
+                Start a project
+                <ArrowRight
+                  size={16}
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              </a>
 
-            <p className="mt-6 inline-flex items-center gap-2 text-sm text-bone/60">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-70" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-mint" />
-              </span>
-              Open for projects, freelance or full-time
-            </p>
+              <p className="flex items-center gap-2 text-sm text-bone/60">
+                <span className="relative flex h-2 w-2 flex-shrink-0">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-70" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-mint" />
+                </span>
+                Open for projects, freelance or full-time
+              </p>
+            </div>
           </div>
 
           {/* Links */}
