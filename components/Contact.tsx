@@ -15,6 +15,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   MessageCircle,
+  CalendarClock,
   ChevronDown,
   Check,
   CircleAlert,
@@ -22,6 +23,8 @@ import {
 import { GithubIcon, LinkedinIcon } from "./icons";
 
 const EMAIL = "yagnesh6202patel@gmail.com";
+
+const BOOKING_URL: string = "https://cal.com/yagneshpatel/30min";
 
 interface Intent {
   value: string;
@@ -84,26 +87,42 @@ const STEPS = [
     step: "01",
     title: "You send the details",
     body: "The short version is fine. What it is, roughly when you need it, and what done looks like.",
+    action: null,
   },
   {
     step: "02",
     title: "I reply within a day",
     body: "With first questions, a rough shape for the build, and an honest read on fit. If I'm not the right person, I'll tell you.",
+    action: null,
   },
   {
     step: "03",
     title: "We talk for 30 minutes",
     body: "A call to size it properly and agree what happens first. No charge, no pitch deck.",
+    action: BOOKING_URL ? "Skip ahead and pick a time" : null,
   },
 ];
 
 const DIRECT = [
+  ...(BOOKING_URL
+    ? [
+        {
+          icon: CalendarClock,
+          label: "Book a call",
+          value: "30 minutes, shown in your timezone",
+          href: BOOKING_URL,
+          external: true,
+          primary: true,
+        },
+      ]
+    : []),
   {
     icon: Mail,
     label: "Email",
     value: EMAIL,
     href: `mailto:${EMAIL}`,
     external: false,
+    primary: false,
   },
   {
     icon: Phone,
@@ -111,6 +130,7 @@ const DIRECT = [
     value: "+91 93284 06174",
     href: "tel:+919328406174",
     external: false,
+    primary: false,
   },
   {
     icon: MessageCircle,
@@ -118,6 +138,7 @@ const DIRECT = [
     value: "Fastest for a quick question",
     href: "https://wa.me/919328406174",
     external: true,
+    primary: false,
   },
 ];
 
@@ -416,7 +437,13 @@ export default function Contact() {
                     : {})}
                   className="group flex items-center gap-3.5 rounded-2xl border border-edge bg-white p-3.5 transition-all hover:-translate-y-0.5 hover:border-signal hover:shadow-lg hover:shadow-forest/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2"
                 >
-                  <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-edge bg-bone text-forest transition-colors group-hover:border-signal group-hover:bg-signal group-hover:text-white">
+                  <span
+                    className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border transition-colors group-hover:border-signal group-hover:bg-signal group-hover:text-white ${
+                      row.primary
+                        ? "border-signal bg-signal text-white"
+                        : "border-edge bg-bone text-forest"
+                    }`}
+                  >
                     <row.icon size={17} />
                   </span>
                   <span className="min-w-0 flex-1">
@@ -483,6 +510,20 @@ export default function Contact() {
                     <p className="mt-1.5 text-sm leading-relaxed text-moss">
                       {item.body}
                     </p>
+                    {item.action && (
+                      <a
+                        href={BOOKING_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group mt-2.5 inline-flex items-center gap-1.5 text-sm font-semibold text-signal underline-offset-4 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2"
+                      >
+                        {item.action}
+                        <ArrowUpRight
+                          size={15}
+                          className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        />
+                      </a>
+                    )}
                   </div>
                 </li>
               ))}
